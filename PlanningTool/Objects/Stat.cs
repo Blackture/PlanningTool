@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 
-namespace RolePlayHelper
+namespace PlanningTool.Objects
 {
     [Serializable]
-    class Stat
+    public class Stat : ToolObject
     {
-        private string name;
+        private string statName;
 
-        public string Name
+        public string StatName
         {
-            get { return name; }
-            set { name = value; }
+            get { return statName; }
+            set
+            {
+                statName = value ?? throw new NullReferenceException("this cannot be null");
+                Name = value;
+            }
         }
 
         private string operationStr;
@@ -32,11 +36,11 @@ namespace RolePlayHelper
             set { this.value = value; }
         }
 
-        public Stat(string _name, string _operation, float _value = 0) //_operation needs to be sth like "a + 3" (starts of with "a" and ends with "z", excpet "e" because it is the number of euler, use "~" to insert to current value)
+        public Stat(string _name, string _operation, float _value = 0) : base(_name) //_operation needs to be sth like "a + 3" (starts of with "a" and ends with "z", excpet "e" because it is the number of euler, use "~" to insert to current value)
         {
             if (_name == null || _name == "")
                 throw new Exception("The name cannot be null or empty");
-            name = _name;
+            statName = _name;
             operationStr = _operation ?? throw new NullReferenceException("This is not be allowed to be null. Use an empty string for no specific operation");
             value = _value;
         }
@@ -105,7 +109,7 @@ namespace RolePlayHelper
             "w",
             "x",
             "y",
-            "z" 
+            "z"
         };
     }
 }

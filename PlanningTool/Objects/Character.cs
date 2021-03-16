@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RolePlayHelper
+namespace PlanningTool.Objects
 {
     [Serializable] //make it serializeable to being able to save it as binary at the end
-    class Character : ICharacterEvents
+    public class Character : ToolObject, ICharacterEvents
     {
-        private string name;
+        private string characterName;
 
-        public string Name
+        public string CharacterName
         {
-            get { return name; }
-            set { name = value; }
+            get { return characterName; }
+            set
+            {
+                characterName = value ?? throw new NullReferenceException("this cannot be null");
+                Name = value;
+            }
         }
 
 
@@ -66,11 +70,11 @@ namespace RolePlayHelper
             ArmorAsSubstractive
         }
 
-        public Character(string _name, float _maxHealth, float _armor = 0, float _strength = 0, ARMORTYPE _armorType = ARMORTYPE.ArmorAsPercentage)
+        public Character(string _name, float _maxHealth, float _armor = 0, float _strength = 0, ARMORTYPE _armorType = ARMORTYPE.ArmorAsPercentage) : base(_name)
         {
             if (_name == null || _name == "")
                 throw new Exception("Name cannot be empty or null");
-            else name = _name;
+            else characterName = _name;
 
             if (_maxHealth > 0)
                 maxHealth = _maxHealth;

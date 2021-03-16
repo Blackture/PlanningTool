@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RolePlayHelper
+namespace PlanningTool
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
