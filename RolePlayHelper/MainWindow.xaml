@@ -5,9 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RolePlayHelper"
         mc:Ignorable="d"
-        Title="Role Play Helper" Height="540" Width="960" SizeToContent="Manual">
+        Title="Planning Tool" Height="540" Width="960" SizeToContent="Manual">
     <Grid Height="540" Width="960">
-        <DockPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="28*"/>
+            <ColumnDefinition Width="181*"/>
+            <ColumnDefinition Width="28*"/>
+            <ColumnDefinition Width="723*"/>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.ColumnSpan="4">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
                     <MenuItem Header="_New" />

@@ -4,6 +4,7 @@ using System.Text;
 
 namespace RolePlayHelper
 {
+    [Serializable] //make it serializeable to being able to save it as binary at the end
     class Player : IPlayerEvents
     {
         private string name;

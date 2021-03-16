@@ -5,6 +5,7 @@ using System.Data;
 
 namespace RolePlayHelper
 {
+    [Serializable]
     class Stat
     {
         private string name;
