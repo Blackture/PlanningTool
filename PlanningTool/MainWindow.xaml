@@ -7,16 +7,12 @@
         mc:Ignorable="d"
         Title="Planning Tool" Height="540" Width="960" SizeToContent="Manual">
     <Grid Height="540" Width="960">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="28*"/>
-            <ColumnDefinition Width="181*"/>
-            <ColumnDefinition Width="28*"/>
-            <ColumnDefinition Width="723*"/>
-        </Grid.ColumnDefinitions>
-        <DockPanel Grid.ColumnSpan="4">
+        <DockPanel Grid.ColumnSpan="5">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
-                    <MenuItem Header="_New" />
+                    <MenuItem Header="_New">
+                        <MenuItem Header="_Roleplay" Click="InitializeRP"/>
+                    </MenuItem>
                     <MenuItem Header="_Open" />
                     <MenuItem Header="_Save" />
                     <Separator />

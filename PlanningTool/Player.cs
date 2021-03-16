@@ -5,7 +5,7 @@ using System.Text;
 namespace RolePlayHelper
 {
     [Serializable] //make it serializeable to being able to save it as binary at the end
-    class Player : IPlayerEvents
+    class Character : ICharacterEvents
     {
         private string name;
 
@@ -57,8 +57,8 @@ namespace RolePlayHelper
 
         public List<Stat> stats;
 
-        private EventHandler<float> onHealthChange;
-        private EventHandler onDeath;
+        private readonly EventHandler<float> onHealthChange;
+        private readonly EventHandler onDeath;
 
         public enum ARMORTYPE
         {
@@ -66,7 +66,7 @@ namespace RolePlayHelper
             ArmorAsSubstractive
         }
 
-        public Player(string _name, float _maxHealth, float _armor = 0, float _strength = 0, ARMORTYPE _armorType = ARMORTYPE.ArmorAsPercentage)
+        public Character(string _name, float _maxHealth, float _armor = 0, float _strength = 0, ARMORTYPE _armorType = ARMORTYPE.ArmorAsPercentage)
         {
             if (_name == null || _name == "")
                 throw new Exception("Name cannot be empty or null");
@@ -140,7 +140,7 @@ namespace RolePlayHelper
         public virtual void OnDeath(object sender, EventArgs e) { }
     }
 
-    interface IPlayerEvents
+    interface ICharacterEvents
     {
         public void OnHealthChange(object sender, float amount);
         public void OnDeath(object sender, EventArgs e);

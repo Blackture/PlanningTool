@@ -29,5 +29,9 @@ namespace RolePlayHelper
         {
             Application.Current.Shutdown();
         }
+
+        private void InitializeRP(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }

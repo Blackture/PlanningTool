@@ -79,33 +79,33 @@ namespace RolePlayHelper
             }
         }
 
-        static Dictionary<int, string> indexedABC = new Dictionary<int, string>()
+        static readonly string[] indexedABC = new string[]
         {
-            { 0, "a" },
-            { 1, "b" },
-            { 2, "c" },
-            { 3, "d" },
-            { 4, "f" },
-            { 5, "g" },
-            { 6, "h" },
-            { 7, "i" },
-            { 8, "j" },
-            { 9, "k" },
-            { 10, "l" },
-            { 11, "m" },
-            { 12, "n" },
-            { 13, "o" },
-            { 14, "p" },
-            { 15, "q" },
-            { 16, "r" },
-            { 17, "s" },
-            { 18, "t" },
-            { 19, "u" },
-            { 20, "v" },
-            { 21, "w" },
-            { 22, "x" },
-            { 23, "y" },
-            { 24, "z" }
+            "a",
+            "b",
+            "c",
+            "d",
+            "f",
+            "g",
+            "h",
+            "i",
+            "j",
+            "k",
+            "l",
+            "m",
+            "n",
+            "o",
+            "p",
+            "q",
+            "r",
+            "s",
+            "t",
+            "u",
+            "v",
+            "w",
+            "x",
+            "y",
+            "z" 
         };
     }
 }
