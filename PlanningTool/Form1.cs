@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using PlanningTool.Licenses;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MongoDB.Driver;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 
 namespace PlanningTool
 {
@@ -53,10 +56,23 @@ namespace PlanningTool
         bool saved;
         bool stopCycle = false;
 
+        public bool isUserAdmin = false;
+        
+        public enum TYPE
+        {
+            STORAGE,
+            ROLEPLAY,
+            BXS_LICENSES
+        }
+
+        public TYPE type;
+
         private void NewStorage(object sender, EventArgs e)
         {
             if (active == null)
             {
+                type = TYPE.STORAGE;
+
                 msMain.Items.Remove(tsStorage);
                 tsStorage = new ToolStripMenuItem("Storage");
                 ToolStripMenuItem tsddb = new ToolStripMenuItem("Add");
@@ -174,7 +190,7 @@ namespace PlanningTool
             {
                 stopCycle = true;
 
-                if (saved)
+                if (saved && type == TYPE.STORAGE)
                 {
                     string[] get = this.Text.Split('-');
 
@@ -187,6 +203,10 @@ namespace PlanningTool
                     saver.Save(System.IO.Path.GetFullPath(get[1].Trim().Replace("*", "")));
                     this.Text = $"Planning Tool - {get[1].Trim().Replace("*", "")} - Last Saving {DateTime.Now.ToLocalTime()}";
                     saved = true;
+                }
+                else if (saved && type == TYPE.BXS_LICENSES)
+                {
+
                 }
                 else
                 {
@@ -218,10 +238,13 @@ namespace PlanningTool
                         (storage.films[i] as Storage.Film).edited = false;
                     }
 
-                    Saver<Storage.Storage> saver = new Saver<Storage.Storage>(storage, saveFile.FileName);
-                    saver.Save(System.IO.Path.GetFullPath(saveFile.FileName));
-                    this.Text = $"Planning Tool - {saveFile.FileName} - Last Saving {DateTime.Now.ToLocalTime()}";
-                    saved = true;
+                    if (type == TYPE.STORAGE)
+                    {
+                        Saver<Storage.Storage> saver = new Saver<Storage.Storage>(storage, saveFile.FileName);
+                        saver.Save(System.IO.Path.GetFullPath(saveFile.FileName));
+                        this.Text = $"Planning Tool - {saveFile.FileName} - Last Saving {DateTime.Now.ToLocalTime()}";
+                        saved = true;
+                    }
                 }
                 stopCycle = false;
             }
@@ -239,8 +262,10 @@ namespace PlanningTool
             };
 
             DialogResult result = openFile.ShowDialog();
-            if (result == DialogResult.OK)
+            if (result == DialogResult.OK && (sender as MenuItem).Text == "Storage")
             {
+                type = TYPE.STORAGE;
+
                 NewStorage(null, null);
 
                 storage = Saver<Storage.Storage>.Open(System.IO.Path.GetFullPath(openFile.FileName), out string pn, out DateTime ls);
@@ -263,6 +288,10 @@ namespace PlanningTool
                     }
                 }
                 saved = true;
+            }
+            else if (result == DialogResult.OK && (sender as MenuItem).Text == "Licenses")
+            {
+                type = TYPE.BXS_LICENSES;
             }
         }
 
@@ -306,6 +335,125 @@ namespace PlanningTool
             if (!stopCycle)
             {
                 CheckForChanges();
+            }
+        }
+
+        private DataTable licenseDataTable = new DataTable();
+        private DataGridView dgv;
+
+        private void NewLicensesWindow(object sender, EventArgs e)
+        {
+            Licenses.Login login = new Licenses.Login();
+       
+            DialogResult res = login.ShowDialog(this);
+
+            if (isUserAdmin && res == DialogResult.OK)
+            {
+                CreateLicenseView();
+                CreateLicenseMenuStrip();
+            }
+        }
+
+        ToolStripMenuItem tsLicenses;
+
+        private void CreateLicenseMenuStrip()
+        {
+            tsLicenses = new ToolStripMenuItem("License Management");
+            ToolStripMenuItem tableAdd = new ToolStripMenuItem("Add License");
+            ToolStripMenuItem tableEdit = new ToolStripMenuItem("Edit License");
+            ToolStripMenuItem tableRem = new ToolStripMenuItem("Remove License");
+            tableAdd.Click += AddLicense;
+            tableEdit.Click += EditLicense;
+            tableRem.Click += RemoveLicense;
+            tsLicenses.DropDownItems.Add(tableAdd);
+            tsLicenses.DropDownItems.Add(tableEdit);
+            tsLicenses.DropDownItems.Add(tableRem);
+            msMain.Items.Add(tsLicenses);
+        }
+
+        private void AddLicense(object sender, EventArgs e)
+        {
+            AddLicense addLicense = new AddLicense();
+            addLicense.ShowDialog(this);
+            UpdateLicenseDataTable();
+        }
+
+        private void EditLicense(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RemoveLicense(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CreateLicenseView()
+        {
+            GroupBox licenses = new GroupBox();
+            licenses.Text = "Licenses";
+            licenses.Anchor = (AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right);
+            licenses.Size = new Size(this.Size.Width - 40, (this.Size.Height - 64) / 2);
+            licenses.Location = new Point(12, 27);
+
+            dgv = new DataGridView();
+
+            licenseDataTable = new DataTable();
+            licenseDataTable.Columns.Add(new DataColumn("License Key", typeof(string)));
+            licenseDataTable.Columns.Add(new DataColumn("Associated UUID", typeof(string)));
+            licenseDataTable.Columns.Add(new DataColumn("Associated Project", typeof(string)));
+            licenseDataTable.Columns.Add(new DataColumn("Is the key used?", typeof(bool)));
+            licenseDataTable.Columns.Add(new DataColumn("Filters", typeof(string)));
+            licenseDataTable.Rows.Clear();
+
+            UpdateLicenseDataTable();
+
+            dgv.DataSource = licenseDataTable;
+            dgv.Location = new Point(6, 19);
+            dgv.Size = new Size(licenses.Size.Width - 12, licenses.Size.Height - 25);
+            dgv.Anchor = (AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right);
+            dgv.ReadOnly = true;
+
+            licenses.Controls.Add(dgv);
+            this.Controls.Add(licenses);
+
+            foreach (DataGridViewColumn col in dgv.Columns)
+            {
+                col.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+
+            dgv.Dock = DockStyle.Fill;
+        }
+
+        private void UpdateLicenseDataTable()
+        {
+            MongoClient dbClient = new MongoClient($"mongodb+srv://{Secrets.standardUsername}:{Secrets.standardPassword}@{Secrets.serverURL}/<dbname>?retryWrites=true&w=majority");
+            IMongoDatabase database = dbClient.GetDatabase("bxs-admin");
+            IMongoCollection<BsonDocument> licenseCollection = database.GetCollection<BsonDocument>("licenses");
+
+            List<License> licenses = new List<License>();
+            List<BsonDocument> bsonElements = licenseCollection.Find(new BsonDocument()).ToList();
+
+            foreach (BsonDocument doc in bsonElements)
+            {
+                License l = BsonSerializer.Deserialize<License>(doc);
+                licenses.Add(l);
+            }
+
+            foreach (License l in licenses)
+            {
+                DataRow row = licenseDataTable.NewRow();
+                row[0] = l._id.ToString();
+                row[1] = l.uuid.ToString();
+                row[2] = l.project.ToString();
+                row[3] = l.used;
+                row[4] = l.filters[0] + "    -    " + l.filters[1];
+                licenseDataTable.Rows.InsertAt(row, 0);
+            }
+
+            foreach (DataGridViewColumn col in dgv.Columns)
+            {
+                col.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
         }
     }
