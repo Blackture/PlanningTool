@@ -362,12 +362,15 @@ namespace PlanningTool
             ToolStripMenuItem tableAdd = new ToolStripMenuItem("Add License");
             ToolStripMenuItem tableEdit = new ToolStripMenuItem("Edit License");
             ToolStripMenuItem tableRem = new ToolStripMenuItem("Remove License");
+            ToolStripMenuItem tableUpdate = new ToolStripMenuItem("Sync with DB");
             tableAdd.Click += AddLicense;
             tableEdit.Click += EditLicense;
             tableRem.Click += RemoveLicense;
+            tableUpdate.Click += SyncWithDB;
             tsLicenses.DropDownItems.Add(tableAdd);
             tsLicenses.DropDownItems.Add(tableEdit);
             tsLicenses.DropDownItems.Add(tableRem);
+            tsLicenses.DropDownItems.Add(tableUpdate);
             msMain.Items.Add(tsLicenses);
         }
 
@@ -380,12 +383,21 @@ namespace PlanningTool
 
         private void EditLicense(object sender, EventArgs e)
         {
-
+            EditLicense editLicense = new EditLicense();
+            editLicense.ShowDialog(this);
+            UpdateLicenseDataTable();
         }
 
         private void RemoveLicense(object sender, EventArgs e)
         {
+            RemoveLicense removeLicense = new RemoveLicense();
+            removeLicense.ShowDialog(this);
+            UpdateLicenseDataTable();
+        }
 
+        private void SyncWithDB(object sender, EventArgs e)
+        {
+            UpdateLicenseDataTable();
         }
 
         private void CreateLicenseView()
@@ -440,10 +452,12 @@ namespace PlanningTool
                 licenses.Add(l);
             }
 
+            licenseDataTable.Clear();
+
             foreach (License l in licenses)
             {
                 DataRow row = licenseDataTable.NewRow();
-                row[0] = l._id.ToString();
+                row[0] = l.id.ToString();
                 row[1] = l.uuid.ToString();
                 row[2] = l.project.ToString();
                 row[3] = l.used;

@@ -36,16 +36,14 @@ namespace PlanningTool
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.storageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.roleplayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.licensesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.storageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.main = new System.Windows.Forms.Timer(this.components);
-            this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.licensesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.storageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.blaXrewStudiosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.licensesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.msMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -107,6 +105,21 @@ namespace PlanningTool
             this.roleplayToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
             this.roleplayToolStripMenuItem.Text = "Roleplay";
             // 
+            // windowToolStripMenuItem
+            // 
+            this.windowToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.licensesToolStripMenuItem});
+            this.windowToolStripMenuItem.Name = "windowToolStripMenuItem";
+            this.windowToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
+            this.windowToolStripMenuItem.Text = "BlaXrew Studios";
+            // 
+            // licensesToolStripMenuItem
+            // 
+            this.licensesToolStripMenuItem.Name = "licensesToolStripMenuItem";
+            this.licensesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.licensesToolStripMenuItem.Text = "Licenses";
+            this.licensesToolStripMenuItem.Click += new System.EventHandler(this.NewLicensesWindow);
+            // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
@@ -125,12 +138,18 @@ namespace PlanningTool
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.storageToolStripMenuItem1,
-            this.blaXrewStudiosToolStripMenuItem});
+            this.storageToolStripMenuItem1});
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "Open";
+            // 
+            // storageToolStripMenuItem1
+            // 
+            this.storageToolStripMenuItem1.Name = "storageToolStripMenuItem1";
+            this.storageToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.storageToolStripMenuItem1.Text = "Storage";
+            this.storageToolStripMenuItem1.Click += new System.EventHandler(this.Open);
             // 
             // exitToolStripMenuItem
             // 
@@ -144,43 +163,6 @@ namespace PlanningTool
             // 
             this.main.Interval = 1000;
             this.main.Tick += new System.EventHandler(this.Tick);
-            // 
-            // windowToolStripMenuItem
-            // 
-            this.windowToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.licensesToolStripMenuItem});
-            this.windowToolStripMenuItem.Name = "windowToolStripMenuItem";
-            this.windowToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
-            this.windowToolStripMenuItem.Text = "BlaXrew Studios";
-            // 
-            // licensesToolStripMenuItem
-            // 
-            this.licensesToolStripMenuItem.Name = "licensesToolStripMenuItem";
-            this.licensesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.licensesToolStripMenuItem.Text = "Licenses";
-            this.licensesToolStripMenuItem.Click += new System.EventHandler(this.NewLicensesWindow);
-            // 
-            // storageToolStripMenuItem1
-            // 
-            this.storageToolStripMenuItem1.Name = "storageToolStripMenuItem1";
-            this.storageToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.storageToolStripMenuItem1.Text = "Storage";
-            this.storageToolStripMenuItem1.Click += new System.EventHandler(this.Open);
-            // 
-            // blaXrewStudiosToolStripMenuItem
-            // 
-            this.blaXrewStudiosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.licensesToolStripMenuItem1});
-            this.blaXrewStudiosToolStripMenuItem.Name = "blaXrewStudiosToolStripMenuItem";
-            this.blaXrewStudiosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.blaXrewStudiosToolStripMenuItem.Text = "BlaXrew Studios";
-            // 
-            // licensesToolStripMenuItem1
-            // 
-            this.licensesToolStripMenuItem1.Name = "licensesToolStripMenuItem1";
-            this.licensesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.licensesToolStripMenuItem1.Text = "Licenses";
-            this.licensesToolStripMenuItem1.Click += new System.EventHandler(this.Open);
             // 
             // Form1
             // 
@@ -216,8 +198,6 @@ namespace PlanningTool
         private System.Windows.Forms.ToolStripMenuItem windowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem licensesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem storageToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem blaXrewStudiosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem licensesToolStripMenuItem1;
     }
 }
 

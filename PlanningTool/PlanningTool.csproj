@@ -141,6 +141,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Destroy.cs" />
+    <Compile Include="Licenses\EditLicense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Licenses\EditLicense.Designer.cs">
+      <DependentUpon>EditLicense.cs</DependentUpon>
+    </Compile>
     <Compile Include="Licenses\AddLicense.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -155,6 +161,12 @@
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Licenses\Project.cs" />
+    <Compile Include="Licenses\RemoveLicense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Licenses\RemoveLicense.Designer.cs">
+      <DependentUpon>RemoveLicense.cs</DependentUpon>
+    </Compile>
     <Compile Include="Licenses\User.cs" />
     <Compile Include="Secrets.cs" />
     <Compile Include="Storage\RemFilm.cs">
@@ -202,11 +214,17 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Licenses\EditLicense.resx">
+      <DependentUpon>EditLicense.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Licenses\AddLicense.resx">
       <DependentUpon>AddLicense.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Licenses\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Licenses\RemoveLicense.resx">
+      <DependentUpon>RemoveLicense.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

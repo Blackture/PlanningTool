@@ -9,7 +9,7 @@ namespace PlanningTool.Licenses
 {
     public class License
     {
-        public ObjectId _id;
+        public ObjectId id;
         public ObjectId uuid;
         public bool used;
         public ObjectId project;

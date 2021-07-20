@@ -9,7 +9,7 @@ namespace PlanningTool.Licenses
 {
     public class Project
     {
-        public ObjectId _id;
+        public ObjectId id;
         public string iconUrl;
         public string progress;
         public string state;
