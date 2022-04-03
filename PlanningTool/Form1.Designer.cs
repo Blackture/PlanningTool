@@ -41,7 +41,7 @@ namespace PlanningTool
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.storageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.storageTSMI1 = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.main = new System.Windows.Forms.Timer(this.components);
             this.msMain.SuspendLayout();
@@ -116,7 +116,7 @@ namespace PlanningTool
             // licensesToolStripMenuItem
             // 
             this.licensesToolStripMenuItem.Name = "licensesToolStripMenuItem";
-            this.licensesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.licensesToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.licensesToolStripMenuItem.Text = "Licenses";
             this.licensesToolStripMenuItem.Click += new System.EventHandler(this.NewLicensesWindow);
             // 
@@ -138,18 +138,18 @@ namespace PlanningTool
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.storageToolStripMenuItem1});
+            this.storageTSMI1});
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
-            // storageToolStripMenuItem1
+            // storageTSMI1
             // 
-            this.storageToolStripMenuItem1.Name = "storageToolStripMenuItem1";
-            this.storageToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.storageToolStripMenuItem1.Text = "Storage";
-            this.storageToolStripMenuItem1.Click += new System.EventHandler(this.Open);
+            this.storageTSMI1.Name = "storageTSMI1";
+            this.storageTSMI1.Size = new System.Drawing.Size(180, 22);
+            this.storageTSMI1.Text = "Storage";
+            this.storageTSMI1.Click += new System.EventHandler(this.Open);
             // 
             // exitToolStripMenuItem
             // 
@@ -197,7 +197,7 @@ namespace PlanningTool
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem windowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem licensesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem storageToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem storageTSMI1;
     }
 }
 

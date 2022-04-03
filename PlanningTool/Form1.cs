@@ -262,7 +262,7 @@ namespace PlanningTool
             };
 
             DialogResult result = openFile.ShowDialog();
-            if (result == DialogResult.OK && (sender as MenuItem).Text == "Storage")
+            if (result == DialogResult.OK && (sender as ToolStripMenuItem).Text == "Storage")
             {
                 type = TYPE.STORAGE;
 
@@ -289,7 +289,7 @@ namespace PlanningTool
                 }
                 saved = true;
             }
-            else if (result == DialogResult.OK && (sender as MenuItem).Text == "Licenses")
+            else if (result == DialogResult.OK && (sender as ToolStripMenuItem).Text == "Licenses")
             {
                 type = TYPE.BXS_LICENSES;
             }
