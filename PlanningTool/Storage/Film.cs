@@ -31,6 +31,8 @@ namespace PlanningTool.Storage
             Fairytale
         }
 
+        public bool tagsAllowed;
+
         private string duration;
 
         public string Duration
@@ -39,6 +41,13 @@ namespace PlanningTool.Storage
             set { duration = value; }
         }
 
+        private string tags;
+
+        public string Tags
+        {
+            get { return tags; }
+            set { tags = value; }
+        }
 
         public List<F_GENRE> genres;
 

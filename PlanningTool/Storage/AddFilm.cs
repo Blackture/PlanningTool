@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -98,6 +99,18 @@ namespace PlanningTool.Storage
         {
             RemGenre remGenre = new RemGenre();
             remGenre.ShowDialog(this);
+        }
+
+        private void ValidateDuration(object sender, CancelEventArgs e)
+        {
+            string text = (sender as TextBox).Text;
+            Regex reg = new Regex("([0-5]*[0-9])(:[0-5]*[0-9])*(,[0-9])*h");
+            if (reg.)
+            {
+                (sender as TextBox).Text = "";
+                MessageBox.Show($"The input {text} hasn't the correct format. \nThe format pattern is: \"([0-5]*[0-9])(:[0-5]*[0-9])*(,[0-9])*h\"", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                e.Cancel = true;
+            }
         }
     }
 }

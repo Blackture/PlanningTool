@@ -37,12 +37,12 @@ namespace PlanningTool.Storage
             this.lblGenre = new System.Windows.Forms.Label();
             this.txGenre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txDuration = new System.Windows.Forms.TextBox();
             this.lblLocation = new System.Windows.Forms.Label();
             this.txLocation = new System.Windows.Forms.TextBox();
             this.bnAddGenre = new System.Windows.Forms.Button();
             this.bnRemoveGenre = new System.Windows.Forms.Button();
             this.dtpReleaseDate = new System.Windows.Forms.DateTimePicker();
+            this.txDuration = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnAdd
@@ -116,13 +116,6 @@ namespace PlanningTool.Storage
             this.label1.TabIndex = 8;
             this.label1.Text = "Duration";
             // 
-            // txDuration
-            // 
-            this.txDuration.Location = new System.Drawing.Point(109, 64);
-            this.txDuration.Name = "txDuration";
-            this.txDuration.Size = new System.Drawing.Size(183, 20);
-            this.txDuration.TabIndex = 9;
-            // 
             // lblLocation
             // 
             this.lblLocation.AutoSize = true;
@@ -166,6 +159,14 @@ namespace PlanningTool.Storage
             this.dtpReleaseDate.Size = new System.Drawing.Size(200, 20);
             this.dtpReleaseDate.TabIndex = 14;
             // 
+            // txDuration
+            // 
+            this.txDuration.Location = new System.Drawing.Point(109, 64);
+            this.txDuration.Name = "txDuration";
+            this.txDuration.Size = new System.Drawing.Size(183, 20);
+            this.txDuration.TabIndex = 9;
+            this.txDuration.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateDuration);
+            // 
             // AddFilm
             // 
             this.AcceptButton = this.btnAdd;
@@ -206,12 +207,12 @@ namespace PlanningTool.Storage
         private System.Windows.Forms.TextBox txTitle;
         private System.Windows.Forms.Label lblGenre;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txDuration;
         private System.Windows.Forms.Label lblLocation;
         private System.Windows.Forms.TextBox txLocation;
         private System.Windows.Forms.Button bnAddGenre;
         public System.Windows.Forms.TextBox txGenre;
         private System.Windows.Forms.Button bnRemoveGenre;
         private System.Windows.Forms.DateTimePicker dtpReleaseDate;
+        private System.Windows.Forms.TextBox txDuration;
     }
 }

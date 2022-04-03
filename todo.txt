@@ -1,0 +1,2 @@
+- add tag function for movies
+- fix regex for duration (matches if the right exists but only in the input and not for input equality)
